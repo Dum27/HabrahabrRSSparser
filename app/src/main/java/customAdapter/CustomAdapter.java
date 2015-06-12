@@ -22,7 +22,8 @@ public class CustomAdapter extends BaseAdapter
     LayoutInflater lInflater;
     ArrayList<RssItem> itemsAr;
 
-    String fontPath = "fonts/Contribute_FREE-version.ttf";
+    String fonTxtDay= "fonts/Contribute_FREE-version.ttf";
+    String fontTxtTitle = "fonts/Monika Script_ru_en.ttf";
 
     public CustomAdapter(Context context, ArrayList<RssItem> itemsAr)
     {
@@ -49,9 +50,10 @@ public class CustomAdapter extends BaseAdapter
          TextView txt_Day = (TextView) convertView.findViewById(R.id.txt_day);
          TextView txt_Title = (TextView) convertView.findViewById(R.id.txt_title);
 
-         Typeface typeface = Typeface.createFromAsset(context.getAssets(), fontPath);
+         Typeface typeface = Typeface.createFromAsset(context.getAssets(), fonTxtDay);
 
          txt_Day.setTypeface(typeface);
+         typeface = Typeface.createFromAsset(context.getAssets(), fontTxtTitle);
          txt_Title.setTypeface(typeface);
 
          txt_Day.setText(item.getDay());
