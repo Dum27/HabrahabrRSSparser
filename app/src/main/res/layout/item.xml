@@ -4,16 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/item_layout"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:background="@drawable/rectangle">
 
 <TextView
-        android:id="@+id/tv_color"
+        android:id="@+id/txt_day"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="gravity = center"
         android:textSize="@dimen/item_txt_size">
 </TextView>
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/item_txt_size">
+    </TextView>
 </LinearLayout>
+    <!--android:layout_gravity="center"-->
+    <!--android:gravity="center"-->
+    <!--android:text="gravity = center"-->
