@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+
+import customAdapter.CustomAdapter;
 import dataBase.DatabaseHandler;
 import rssReader.RssFeed;
 import rssReader.RssItem;
@@ -32,6 +34,7 @@ import rssReader.RssReader;
 public class Fragment1 extends Fragment
 {
     Fragment2 fragment2;
+    CustomAdapter customAdapter;
     ArrayList<RssItem> rssItems;
     ArrayList<String> showItems;
     DatabaseHandler db;
@@ -104,9 +107,12 @@ public class Fragment1 extends Fragment
             showItems.add(rssItem.getDay() + " " + rssItem.getTitle());
         }
         final ArrayAdapter<String> adapter;
-        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, showItems);
+       // adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, showItems);
+        customAdapter = new CustomAdapter(context, rssItems);
+
+
         // Привяжем массив через адаптер к ListView
-        listView.setAdapter(adapter);
+        listView.setAdapter(customAdapter);
         // Добавляем слушателя
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
