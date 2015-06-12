@@ -3,6 +3,7 @@ package customAdapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,19 +44,13 @@ public class CustomAdapter extends BaseAdapter
     // filling and return view
      @Override public View getView(int position, View convertView, ViewGroup parent)
      {
-         // now we using old view if he don't equals null.
-         // But if we use more then twenty colors, would be better re inflate view (delete this checking)
-//         if(convertView==null)
-//         {
-             convertView = lInflater.inflate(R.layout.item, parent, false);
-      //   }
-
+         convertView = lInflater.inflate(R.layout.item, parent, false);
          RssItem item = getProduct(position);
-
          TextView txt_Day = (TextView) convertView.findViewById(R.id.txt_day);
          TextView txt_Title = (TextView) convertView.findViewById(R.id.txt_title);
 
          Typeface typeface = Typeface.createFromAsset(context.getAssets(), fontPath);
+
          txt_Day.setTypeface(typeface);
          txt_Title.setTypeface(typeface);
 

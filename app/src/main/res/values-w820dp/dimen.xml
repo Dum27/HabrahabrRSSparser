@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="shapeRadius">           15.0dp</dimen>
-    <dimen name="lv_dividerHeight">        10dp</dimen>
-    <dimen name="lv_layout_marginBottom">  15dp</dimen>
-    <dimen name="lv_layout_margin">        15dp</dimen>
-    <dimen name="item_txt_size">           40dp</dimen>
-    <dimen name="biggerSize">             220dp</dimen>
-</resources>

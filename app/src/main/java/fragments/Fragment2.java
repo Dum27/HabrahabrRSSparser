@@ -33,12 +33,12 @@ public class Fragment2 extends Fragment
         }
 
         mWebView = (WebView) getActivity().findViewById(R.id.webview);
-        //не будем тревожить стандартный браузер
+
         mWebView.setWebViewClient(new HelloWebViewClient());
 
-        // включаем поддержку JavaScript
+
         mWebView.getSettings().setJavaScriptEnabled(true);
-        // указываем страницу загрузки
+
         mWebView.loadUrl(link);
     }
 

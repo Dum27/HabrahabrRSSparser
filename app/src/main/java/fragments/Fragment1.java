@@ -36,7 +36,6 @@ public class Fragment1 extends Fragment
     Fragment2 fragment2;
     CustomAdapter customAdapter;
     ArrayList<RssItem> rssItems;
-    ArrayList<String> showItems;
     DatabaseHandler db;
     ListView listView;
     Context context;
@@ -100,20 +99,19 @@ public class Fragment1 extends Fragment
 
     public void showData()
     {
-        showItems = new ArrayList<String>();
-        for(RssItem rssItem : rssItems)
-        {
-            Log.i("RSS Reader", rssItem.getTitle() + " " + rssItem.getFeed());
-            showItems.add(rssItem.getDay() + " " + rssItem.getTitle());
-        }
-        final ArrayAdapter<String> adapter;
+//        showItems = new ArrayList<String>();
+//        for(RssItem rssItem : rssItems)
+//        {
+//            showItems.add(rssItem.getDay() + " " + rssItem.getTitle());
+//        }
+        //final ArrayAdapter<String> adapter;
        // adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, showItems);
         customAdapter = new CustomAdapter(context, rssItems);
 
 
-        // Привяжем массив через адаптер к ListView
+
         listView.setAdapter(customAdapter);
-        // Добавляем слушателя
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
