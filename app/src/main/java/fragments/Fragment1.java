@@ -38,6 +38,8 @@ public class Fragment1 extends Fragment
     ListView listView;
     Context context;
     MyTask mt;
+    String link;
+
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,9 +50,14 @@ public class Fragment1 extends Fragment
   }
 
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(Activity activity)
+    {
         super.onAttach(activity);
-
+        Bundle bundle = getArguments();
+        if (bundle != null)
+        {
+            link = bundle.getString("link");
+        }
     }
 
     @Override
@@ -64,19 +71,23 @@ public class Fragment1 extends Fragment
     @Override
     public void onResume() {
         super.onResume();
+    if(rssItems == null)
+    {
         getData();
+    }else
+    {
+        showData();
+    }
     }
 
     public void getData()
     {
         if(isOnline(context))
         {
-            // Toast.makeText(MainActivity.this,"internet connection enable",Toast.LENGTH_LONG).show();
             mt = new MyTask();
-            mt.execute();
+            mt.execute(link,null,null);
         }else
         {
-            // Toast.makeText(MainActivity.this,"internet connection disable",Toast.LENGTH_LONG).show();
             db = new DatabaseHandler(context);
             rssItems = db.getAllItems();
 
@@ -114,7 +125,7 @@ public class Fragment1 extends Fragment
 
                 }else
                 {
-                    Toast.makeText(context, "sorry but internet connection is disable", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.noConnection, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -141,7 +152,7 @@ public class Fragment1 extends Fragment
         }
     }
 
-    class MyTask extends AsyncTask<Void, Integer, Void>
+    class MyTask extends AsyncTask<String, Integer, Void>
     {
         @Override
         protected void onPreExecute()
@@ -149,11 +160,10 @@ public class Fragment1 extends Fragment
             super.onPreExecute();
         }
         @Override
-        protected Void doInBackground(Void... params)
+        protected Void doInBackground(String... params)
         {
-            URL url = null;
             try{
-                url = new URL("http://habrahabr.ru/rss/hubs/");
+               URL url = new URL(params[0]);
                 RssFeed feed = RssReader.read(url);
                 rssItems = feed.getRssItems();
             } catch (MalformedURLException e) {

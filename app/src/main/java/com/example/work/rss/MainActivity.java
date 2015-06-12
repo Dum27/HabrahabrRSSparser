@@ -17,16 +17,18 @@ public class MainActivity extends FragmentActivity
     Fragment frag1;
 
 
-
+String link ="http://habrahabr.ru/rss/hubs/";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        frag1 = new fragments.Fragment1();
+        Bundle bundle = new Bundle();
+        bundle.putString("link", link);
 
+        frag1 = new fragments.Fragment1();
+        frag1.setArguments(bundle);
         FragmentTransaction fTrans =  getSupportFragmentManager().beginTransaction();
         fTrans.add(R.id.frgmCont,frag1);
         fTrans.commit();

@@ -30,7 +30,6 @@ public class Fragment2 extends Fragment
         Bundle bundle = getArguments();
         if (bundle != null) {
             link = bundle.getString("link");
-            Log.d("Link",link);
         }
 
         mWebView = (WebView) getActivity().findViewById(R.id.webview);
