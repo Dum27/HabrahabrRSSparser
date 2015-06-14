@@ -1,9 +1,6 @@
 package com.example.work.rss;
 
 
-import android.app.Activity;
-
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -27,7 +24,7 @@ String link ="http://habrahabr.ru/rss/hubs/";
         Bundle bundle = new Bundle();
         bundle.putString("link", link);
 
-        frag1 = new fragments.Fragment1();
+        frag1 = new com.example.work.rss.fragments.Fragment1();
         frag1.setArguments(bundle);
         FragmentTransaction fTrans =  getSupportFragmentManager().beginTransaction();
         fTrans.add(R.id.frgmCont,frag1);

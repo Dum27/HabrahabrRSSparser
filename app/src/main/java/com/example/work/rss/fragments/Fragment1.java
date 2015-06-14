@@ -1,4 +1,4 @@
-package fragments;
+package com.example.work.rss.fragments;
 
 
 import android.app.Activity;
@@ -9,12 +9,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.example.work.rss.R;
@@ -24,16 +23,17 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import customAdapter.CustomAdapter;
-import dataBase.DatabaseHandler;
-import rssReader.RssFeed;
-import rssReader.RssItem;
-import rssReader.RssReader;
+import com.example.work.rss.customAdapter.CustomAdapter;
+import com.example.work.rss.dataBase.DatabaseHandler;
+import com.example.work.rss.rssReader.RssFeed;
+import com.example.work.rss.rssReader.RssItem;
+import com.example.work.rss.rssReader.RssReader;
 
 
 public class Fragment1 extends Fragment
 {
     Fragment2 fragment2;
+    ImageView imgRefresh;
     CustomAdapter customAdapter;
     ArrayList<RssItem> rssItems;
     DatabaseHandler db;
@@ -44,11 +44,18 @@ public class Fragment1 extends Fragment
 
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+  {
     View view = inflater.inflate(R.layout.fragment1, null);
       listView = (ListView) view.findViewById(R.id.list);
+      imgRefresh = (ImageView)view.findViewById(R.id.img_refresh);
+      imgRefresh.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              onResume();
+          }
+      });
     return view;
-
   }
 
     @Override
@@ -63,13 +70,13 @@ public class Fragment1 extends Fragment
     }
 
     @Override
+
     public void onStart()
     {
         super.onStart();
         context = getActivity();
         fragment2 = new Fragment2();
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -92,26 +99,14 @@ public class Fragment1 extends Fragment
         {
             db = new DatabaseHandler(context);
             rssItems = db.getAllItems();
-
             showData();
         }
     }
 
     public void showData()
     {
-//        showItems = new ArrayList<String>();
-//        for(RssItem rssItem : rssItems)
-//        {
-//            showItems.add(rssItem.getDay() + " " + rssItem.getTitle());
-//        }
-        //final ArrayAdapter<String> adapter;
-       // adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, showItems);
         customAdapter = new CustomAdapter(context, rssItems);
-
-
-
         listView.setAdapter(customAdapter);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -170,6 +165,8 @@ public class Fragment1 extends Fragment
                URL url = new URL(params[0]);
                 RssFeed feed = RssReader.read(url);
                 rssItems = feed.getRssItems();
+
+
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (SAXException e) {
@@ -177,6 +174,9 @@ public class Fragment1 extends Fragment
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+
+
             return null;
         }
 
@@ -184,8 +184,9 @@ public class Fragment1 extends Fragment
         protected void onPostExecute(Void result)
         {
             super.onPostExecute(result);
-            showData();
             rewriteDB();
+            showData();
+
         }
     }
 }

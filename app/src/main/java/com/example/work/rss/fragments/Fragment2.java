@@ -1,8 +1,7 @@
-package fragments;
+package com.example.work.rss.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,17 +27,14 @@ public class Fragment2 extends Fragment
     public void onStart() {
         super.onStart();
         Bundle bundle = getArguments();
+
         if (bundle != null) {
             link = bundle.getString("link");
         }
 
         mWebView = (WebView) getActivity().findViewById(R.id.webview);
-
         mWebView.setWebViewClient(new HelloWebViewClient());
-
-
         mWebView.getSettings().setJavaScriptEnabled(true);
-
         mWebView.loadUrl(link);
     }
 

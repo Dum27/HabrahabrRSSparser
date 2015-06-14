@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package rssReader;
+package com.example.work.rss.rssReader;
 
 import java.util.ArrayList;
 
